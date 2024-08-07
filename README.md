@@ -1,22 +1,27 @@
 # Flat-to-DB2-to-DDL-for-SQL
  <h1> Lessons learned in transitioning </h1>
  Flat files are notorious for containing all sorts of data anywhere within the file. This is especially true if you come across multi-format flat files and need to convert them to SQL tables.
+ 
 
  Most System 36 flat files have a primary key that if you run a  DSPFFD command will contain a key K00001 and data F00001:
+ 
  ![image](https://github.com/user-attachments/assets/0ba60ec1-de51-43ae-bbfc-5b08f113486f)
 
  
 The data in this file is multi formated 
+
 ![image](https://github.com/user-attachments/assets/05afec51-ea47-4b1a-a9de-3cb8756ed6ce)
 
 Look at positions 15 - 19 , the second record has packed data while the other three have character data.
 There is no way to define this in SQL, you need to create 2 tables, one that defines the packed data and another that defines the character.
 
 You need to figure out what is unique about the format so you can filter out the data in the copy. In this case all packed records have 0000000000I starting at position 1.
-
+<p>
 The system 36 also is know to have lettered prefix's on the files to allow for multi-company occurances or instances of data that all reside in the QS36F files library (schema).
 In this case there are multiple prefix's you will need to build the tables for each occurance. Create the table and copy the data to the destination omitting the appropriate data. 
+	</p>
 -------------------------------------
+
 CREATE TABLE ntmtools.tbl_apwsavj
  for system name "APWSAVJ"
 (
@@ -37,7 +42,7 @@ CREATE TABLE ntmtools.tbl_apwsavj
 	AWINV# IS 'invoice Number' ,
 	AWCHEQ IS 'manual cheque' ) ;     
      
-CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVJ) MBROPT(*REPLACE) INCCHAR(*RCD 1 *NE 0000000000I) FMTOPT(*NOCHK)      
+<p> CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVJ) MBROPT(*REPLACE) INCCHAR(*RCD 1 *NE 0000000000I) FMTOPT(*NOCHK)   </p>   
 ---------------------------------------
 Then build another table that contains the other data structure
 -------------------------------------
