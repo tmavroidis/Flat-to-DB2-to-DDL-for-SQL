@@ -22,51 +22,90 @@ In this case there are multiple prefix's you will need to build the tables for e
 	</p>
 -------------------------------------
 
-CREATE TABLE ntmtools.tbl_apwsavj
- for system name "APWSAVJ"
-(
+CREATE TABLE ntmtools.tbl_apwsavj for system name "APWSAVJ"
+
+ (
+ 
 	vendor_number                  for AWVEND NUMERIC(5, 0) NOT NULL DEFAULT 0 ,
+ 
 	voucher_number                 for AWVCH# NUMERIC(5, 0) NOT NULL DEFAULT 0 ,
+ 
 	record_type                    for AWRTYP CHAR(1) NOT NULL DEFAULT '' ,
+ 
 	sequence_number                for AWSEQ# NUMERIC(3, 0) NOT NULL DEFAULT 0 ,
+ 
 	invoice_number                 for AWINV# CHAR(12) NOT NULL DEFAULT '' ,
-	manual_cheque                  for AWCHEQ CHAR(1) NOT NULL DEFAULT ''            
+ 
+	manual_cheque                  for AWCHEQ CHAR(1) NOT NULL DEFAULT ''     
+ 
 	)
+
+ 
 	RCDFMT AWVCHRR    ;   
+ 
  
  LABEL ON COLUMN ntmtools.tbl_apwsavj
-( AWVEND IS 'vendor Number' ,
+ 
+ ( AWVEND IS 'vendor Number' ,
+ 
 	AWVCH# IS 'voucher Number' ,
+ 
 	AWRTYP IS 'record Type' ,
+ 
 	AWSEQ# IS 'sequence Number' ,
+ 
 	AWINV# IS 'invoice Number' ,
-	AWCHEQ IS 'manual cheque' ) ;     
-     
+ 
+	AWCHEQ IS 'manual cheque' ) ;  
+ 
 <p> CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVJ) MBROPT(*REPLACE) INCCHAR(*RCD 1 *NE 0000000000I) FMTOPT(*NOCHK)   </p>   
+
 ---------------------------------------
+
 Then build another table that contains the other data structure
+
 -------------------------------------
+
 CREATE TABLE ntmtools.tbl_apwsavj2
+
  for system name "APWSAVJ2"
+ 
 (
+
 	vendor_number                  for AWVEND NUMERIC(5, 0) NOT NULL DEFAULT 0 ,
+ 
 	voucher_number                 for AWVCH# NUMERIC(5, 0) NOT NULL DEFAULT 0 ,
+ 
 	record_type                    for AWRTYP CHAR(1) NOT NULL DEFAULT '' ,
+ 
 	sequence_number                for AWSEQ# NUMERIC(3, 0) NOT NULL DEFAULT 0 ,
+ 
 	voucher_number                 for AWINV# DECIMAL(7, 0) NOT NULL DEFAULT '' ,
+ 
  unused_00                      for AWUN00 CHAR(4) NOT NULL DEFAULT '',
-	manual_cheque                  for AWCHEQ CHAR(1) NOT NULL DEFAULT ''            
+ 
+	manual_cheque                  for AWCHEQ CHAR(1) NOT NULL DEFAULT ''     
+ 
 	)
+ 
 	RCDFMT AWVCHRR    ;   
  
+ 
  LABEL ON COLUMN ntmtools.tbl_apwsavj2
+ 
 ( AWVEND IS 'vendor Number' ,
+
 	AWVCH# IS 'voucher Number' ,
+ 
 	AWRTYP IS 'record Type' ,
+ 
 	AWSEQ# IS 'sequence Number' ,
+ 
 	AWINV# IS 'voucher Number' ,
-	AWCHEQ IS 'manual cheque' ) ;     
+ 
+	AWCHEQ IS 'manual cheque' ) ;  
+ 
      
-CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVJ2) MBROPT(*REPLACE) INCCHAR(*RCD 1 *EQ 0000000000I) FMTOPT(*NOCHK)      
+<p> CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVJ2) MBROPT(*REPLACE) INCCHAR(*RCD 1 *EQ 0000000000I) FMTOPT(*NOCHK)      
 ---------------------------------------
  
