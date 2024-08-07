@@ -4,9 +4,11 @@
 
  Most System 36 flat files have a primary key that if you run a  DSPFFD command will contain a key K00001 and data F00001:
  ![image](https://github.com/user-attachments/assets/0ba60ec1-de51-43ae-bbfc-5b08f113486f)
+
  
 The data in this file is multi formated 
 ![image](https://github.com/user-attachments/assets/05afec51-ea47-4b1a-a9de-3cb8756ed6ce)
+
 Look at positions 15 - 19 , the second record has packed data while the other three have character data.
 There is no way to define this in SQL, you need to create 2 tables, one that defines the packed data and another that defines the character.
 
