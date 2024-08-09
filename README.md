@@ -109,3 +109,25 @@ CREATE TABLE ntmtools.tbl_apwsav_dtl_j
 <p> CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVDJ) MBROPT(*REPLACE) INCCHAR(*RCD 1 *EQ 0000000000I) FMTOPT(*NOCHK)      
 ---------------------------------------
  
+Once the tables are built you need to build a record selector logical that has the filename that you are trying to replace
+
+                R AWVCHRD                   PFILE(APWSAVDJ)
+		
+                K AWVEND
+		
+                K AWVCH#
+		
+                K AWRTYP
+		
+                K AWSEQ#
+		
+                R AWVCHRR                   PFILE(APWSAVHJ)
+		
+                K AWVEND
+		
+                K AWVCH#
+		
+                K AWRTYP
+		
+                K AWSEQ#  
+		
