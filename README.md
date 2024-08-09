@@ -22,7 +22,7 @@ In this case there are multiple prefix's you will need to build the tables for e
 	</p>
 -------------------------------------
 
-CREATE TABLE ntmtools.tbl_apwsavj for system name "APWSAVJ"
+CREATE TABLE ntmtools.tbl_apwsav_hdr_j for system name "APWSAVHJ"
 
  (
  
@@ -44,7 +44,7 @@ CREATE TABLE ntmtools.tbl_apwsavj for system name "APWSAVJ"
 	RCDFMT AWVCHRR    ;   
  
  
- LABEL ON COLUMN ntmtools.tbl_apwsavj
+ LABEL ON COLUMN ntmtools.tbl_apwsav_hdr_j
  
  ( AWVEND IS 'vendor Number' ,
  
@@ -58,7 +58,7 @@ CREATE TABLE ntmtools.tbl_apwsavj for system name "APWSAVJ"
  
 	AWCHEQ IS 'manual cheque' ) ;  
  
-<p> CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVJ) MBROPT(*REPLACE) INCCHAR(*RCD 1 *NE 0000000000I) FMTOPT(*NOCHK)   </p>   
+<p> CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVHJ) MBROPT(*REPLACE) INCCHAR(*RCD 1 *NE 0000000000I) FMTOPT(*NOCHK)   </p>   
 
 ---------------------------------------
 
@@ -66,9 +66,9 @@ Then build another table that contains the other data structure
 
 -------------------------------------
 
-CREATE TABLE ntmtools.tbl_apwsavj2
+CREATE TABLE ntmtools.tbl_apwsav_dtl_j
 
- for system name "APWSAVJ2"
+ for system name "APWSAVDJ"
  
 (
 
@@ -91,7 +91,7 @@ CREATE TABLE ntmtools.tbl_apwsavj2
 	RCDFMT AWVCHRR    ;   
  
  
- LABEL ON COLUMN ntmtools.tbl_apwsavj2
+ LABEL ON COLUMN ntmtools.tbl_apwsav_dtl_j
  
 ( AWVEND IS 'vendor Number' ,
 
@@ -106,6 +106,6 @@ CREATE TABLE ntmtools.tbl_apwsavj2
 	AWCHEQ IS 'manual cheque' ) ;  
  
      
-<p> CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVJ2) MBROPT(*REPLACE) INCCHAR(*RCD 1 *EQ 0000000000I) FMTOPT(*NOCHK)      
+<p> CL: CPYF FROMFILE(QS36F/J.APWSAV) TOFILE(NTMTOOLS/APWSAVDJ) MBROPT(*REPLACE) INCCHAR(*RCD 1 *EQ 0000000000I) FMTOPT(*NOCHK)      
 ---------------------------------------
  
